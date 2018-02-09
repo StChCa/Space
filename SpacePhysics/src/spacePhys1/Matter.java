@@ -3,20 +3,23 @@ package spacePhys1;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Object {
+public class Matter {
 	//MOVEMENT VARS
 	// xLoc and yLoc will be calculated by move() and set in constructor
 	double xLoc;
 	double yLoc;
+	double xSpeed;
+	double ySpeed;
+	double angle;
 
 	//OTHER VARS
 	double mass;
 	
-	public Object() {
+	public Matter() {
 		
 	}
 	
-	public Object(double xLoc,double yLoc, double mass) {
+	public Matter(double xLoc,double yLoc, double mass) {
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
 		this.mass = mass;
@@ -47,7 +50,7 @@ public class Object {
 		this.mass = mass;
 	}
 
-	public void paintObject(Graphics g){
+	public void paintMatter(Graphics g){
 		
 		g.setColor(Color.WHITE);
 		g.fillOval((int)this.xLoc,(int)-this.yLoc,20,20);
@@ -62,20 +65,20 @@ public class Object {
 		this.yLoc += (gravMag * Math.sin(gravDir));
 	}
 	
-	public double distanceBetween(Object a, Object b){
+	public double distanceBetween(Matter a, Matter b){
 		
 		return Math.sqrt(  (a.getxLoc() + b.getxLoc())*(a.getxLoc() + b.getxLoc()) 
 				+ (a.getyLoc() + b.getyLoc())*(a.getyLoc() + b.getyLoc()));
 	}
 	
-	public static double gravEquasion(Object a, Object b, double r){
+	public static double gravEquasion(Matter a, Matter b, double r){
 		double force;
 		
 		force = ( 9.8*(a.getMass()*b.getMass()) / (r*r) );
 		return force;
 	}
 	
-	public static double gravDirection(Object a, Object b){
+	public static double gravDirection(Matter a, Matter b){
 		double degrees;
 		double cXLoc;
 		double cYLoc;

@@ -11,9 +11,10 @@ import java.util.ArrayList;
 public class System extends Applet implements Runnable {
 	int width = 1200, height = 900;
 	int numberOfObjects = 300;
+	int gameTick = 0;
 	
 	Thread thread;
-	ArrayList<Object> objects = new ArrayList<Object>();
+	ArrayList<Matter> matters = new ArrayList<Matter>();
 	
 	public void init(){
 		this.resize(width, height);
@@ -28,8 +29,8 @@ public class System extends Applet implements Runnable {
 		g.translate(width/2, height/2);
 		
 		
-		for(Object a : objects) {
-			a.paintObject(g);
+		for(Matter a : matters) {
+			a.paintMatter(g);
 		}
 		
 }
@@ -45,19 +46,19 @@ public class System extends Applet implements Runnable {
 		
 //here is where you make your initial materials with a for loop}
 		
-		Object sun = new Object(0,0,1000);		
-		objects.add(sun);
+		Matter sun = new Matter(0,0,1000);		
+		matters.add(sun);
 		
-		Object sun2 = new Object(100,100,10);		
-		objects.add(sun2);
-		
-//		Object sun3 = new Object(100,200,500);		
-//		objects.add(sun3);
-		
+		Matter sun2 = new Matter(300,300,10);		
+		matters.add(sun2);
+//		
+//		Matter sun3 = new Matter(100,200,500);		
+//		matters.add(sun3);
+//		
 //		for(int x = 2 ; x < numberOfObjects; x++) {
-//			Object tempObj = new Object();
+//			Matter tempObj = new Matter();
 //			
-//			objects.add(tempObj);
+//			matters.add(tempObj);
 //		}
 		
 		for(;;){
@@ -67,7 +68,9 @@ public class System extends Applet implements Runnable {
 
 			try {
 				//Change sleep time to speed or slow simulation.
-				Thread.sleep(1000);
+				Thread.sleep(40);
+				gameTick++;
+				
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();
@@ -78,28 +81,22 @@ public class System extends Applet implements Runnable {
 	}
 	
 	private void moveObjs(){
-		double gravityMagnitude = 0;
 		double gravityDirection = 0;
-		double distBetween;
+		double xSpeed = 15;
+		double ySpeed = -15;
+		double gravMag = 0;
 		
-		for(Object a : objects) {
-
-			for(Object b : objects){
-				if(a == b){
-					continue;
-				}
-				double these2Grav;
-				double these2Dir;
-				distBetween = a.distanceBetween(a, b);
-				these2Grav = Object.gravEquasion(a,b,distBetween);
-				these2Dir = Object.gravDirection(a,b);
-				gravityMagnitude += these2Grav;
-				gravityDirection += these2Dir;
-			}
-			
-			a.move(gravityMagnitude, gravityDirection);
-			
-		}
+		Matter a = matters.get(0);
+		Matter b = matters.get(1);
+		
+		gravityDirection = (Math.toDegrees(Math.tan((Math.abs(b.yLoc - a.yLoc))/Math.abs(b.xLoc - a.xLoc) )));
+		
+		gravMag += -.25 *gameTick;
+		
+		b.yLoc += (gravMag * Math.cos(gravityDirection));
+		b.xLoc += (gravMag * Math.sin(gravityDirection));
+		
+		
 		
 	}
 
