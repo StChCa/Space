@@ -38,22 +38,32 @@ public class System extends Applet implements Runnable {
 	
 	public void update() {
 
-		moveObjs();
+		//moveObjs();
+		for (Matter matter : matters) {
+			matter.moveLoop(matters);
+		}
+		
 
 	}
 
 	public void run() {		
 		
 //here is where you make your initial materials with a for loop}
-		
-		Matter sun = new Matter(0,0,1000);		
+//		
+		Matter sun = new Matter(0,0,109*100000);		
 		matters.add(sun);
 		
-		Matter sun2 = new Matter(300,300,10);		
+		Matter sun2 = new Matter(300,300,3*10000);		
 		matters.add(sun2);
-//		
-//		Matter sun3 = new Matter(100,200,500);		
-//		matters.add(sun3);
+
+		Matter sun3 = new Matter(-300,300,3*10000);		
+		matters.add(sun3);
+		
+		Matter sun4 = new Matter(-300,-300,3*10000);		
+		matters.add(sun4);
+		
+		Matter sun5 = new Matter(300,150,3*10000);		
+		matters.add(sun5);
 //		
 //		for(int x = 2 ; x < numberOfObjects; x++) {
 //			Matter tempObj = new Matter();
@@ -68,7 +78,7 @@ public class System extends Applet implements Runnable {
 
 			try {
 				//Change sleep time to speed or slow simulation.
-				Thread.sleep(40);
+				Thread.sleep(20);
 				gameTick++;
 				
 			} catch (InterruptedException e) {
@@ -77,26 +87,6 @@ public class System extends Applet implements Runnable {
 			}
 			
 		}
-		
-	}
-	
-	private void moveObjs(){
-		double gravityDirection = 0;
-		double xSpeed = 15;
-		double ySpeed = -15;
-		double gravMag = 0;
-		
-		Matter a = matters.get(0);
-		Matter b = matters.get(1);
-		
-		gravityDirection = (Math.toDegrees(Math.tan((Math.abs(b.yLoc - a.yLoc))/Math.abs(b.xLoc - a.xLoc) )));
-		
-		gravMag += -.25 *gameTick;
-		
-		b.yLoc += (gravMag * Math.cos(gravityDirection));
-		b.xLoc += (gravMag * Math.sin(gravityDirection));
-		
-		
 		
 	}
 
