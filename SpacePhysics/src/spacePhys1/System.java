@@ -41,6 +41,7 @@ public class System extends Applet implements Runnable {
 		//moveObjs();
 		for (Matter matter : matters) {
 			matter.moveLoop(matters);
+			matter.reCenter(matters);
 		}
 		
 
@@ -49,27 +50,27 @@ public class System extends Applet implements Runnable {
 	public void run() {		
 		
 //here is where you make your initial materials with a for loop}
-//		
-		Matter sun = new Matter(0,0,109*100000);		
+		
+		Matter sun = new Matter(0,0,109*1000000, true);		
 		matters.add(sun);
 		
-		Matter sun2 = new Matter(300,300,3*10000);		
-		matters.add(sun2);
-
-		Matter sun3 = new Matter(-300,300,3*10000);		
-		matters.add(sun3);
-		
-		Matter sun4 = new Matter(-300,-300,3*10000);		
-		matters.add(sun4);
-		
-		Matter sun5 = new Matter(300,150,3*10000);		
-		matters.add(sun5);
+//		Matter sun2 = new Matter(300,300,3*10000, 1,-1);		
+//		matters.add(sun2);
+//
+//		Matter sun3 = new Matter(-300,300,3*10000,-1,-1.3);		
+//		matters.add(sun3);
 //		
-//		for(int x = 2 ; x < numberOfObjects; x++) {
-//			Matter tempObj = new Matter();
-//			
-//			matters.add(tempObj);
-//		}
+//		Matter sun4 = new Matter(-300,-300,3*10000,1,-1);		
+//		matters.add(sun4);
+//		
+//		Matter sun5 = new Matter(300,-300,3*10000,1,1);		
+//		matters.add(sun5);
+		
+		for(int x = 2 ; x < numberOfObjects; x++) {
+			Matter tempObj = new Matter(Math.random()*width - width/2, Math.random()*height - height/2, (Math.random()*5)*10000 , Math.random()*1/2,Math.random()*1/2);
+			
+			matters.add(tempObj);
+		}
 		
 		for(;;){
 			//This is what loops the system to simulate motion
