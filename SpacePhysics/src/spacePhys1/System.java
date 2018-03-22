@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class System extends Applet implements Runnable {
-	int width = 1200, height = 900;
-	int numberOfObjects = 300;
+	int width = 3840, height = 2160;
+	int numberOfObjects = 200;
 	int gameTick = 0;
 	
 	Thread thread;
@@ -54,7 +54,7 @@ public class System extends Applet implements Runnable {
 		Matter sun = new Matter(0,0,109*1000000, true);		
 		matters.add(sun);
 		
-//		Matter sun2 = new Matter(300,300,3*10000, 1,-1);		
+//		Matter sun2 = new Matter(1200,900,3*10000, 1,-1);		
 //		matters.add(sun2);
 //
 //		Matter sun3 = new Matter(-300,300,3*10000,-1,-1.3);		
@@ -67,7 +67,8 @@ public class System extends Applet implements Runnable {
 //		matters.add(sun5);
 		
 		for(int x = 2 ; x < numberOfObjects; x++) {
-			Matter tempObj = new Matter(Math.random()*width - width/2, Math.random()*height - height/2, (Math.random()*5)*10000 , Math.random()*1/2,Math.random()*1/2);
+			Matter tempObj = new Matter(Math.random()*width - width/2, Math.random()*height - height/2,
+					(Math.random()*5)*10000 , Math.random()*1/2-.25,Math.random()*1/2-.25);
 			
 			matters.add(tempObj);
 		}
