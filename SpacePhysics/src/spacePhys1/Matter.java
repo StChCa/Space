@@ -137,21 +137,27 @@ public class Matter {
 		}
 	}
 	
-	private boolean hasColission(Matter matterA, Matter matterB) {
+	private boolean hasColission(Matter matterBig, Matter matterSmall) {
 		// if we have a colission return true.
+		if(matterBig.getMass() > matterSmall.getMass()){
+			Matter temp = matterSmall;
+			matterSmall = matterBig;
+			matterBig = temp;
+		}
+		double smallLeftBound = matterSmall.getxLoc() - matterSmall.getRadius(); 
+		double smallUpBound = matterSmall.getyLoc() + matterSmall.getRadius();
+		double bigLeftBound = matterBig.getxLoc() - matterBig.getRadius();
+		double bigUpBound = matterBig.getxLoc() + matterBig.getRadius();
 		
-		// A collision would be if a's x +- radius includes b's xLoc +- radius
-//		if ((matterA.getxLoc() - matterA.radius > matterB.getxLoc() &&
-//				matterA.getxLoc() + matterA.radius < matterB.getxLoc()) &&
-//				(matterA.getyLoc() - matterA.radius > matterB.getyLoc() &&
-//						matterA.getyLoc() + matterA.radius < matterB.getyLoc())) {
-//			return true;
-//		}
+		double smallRightBound = matterSmall.getxLoc() + matterSmall.getRadius(); 
+		double smallLowBound = matterSmall.getyLoc() - matterSmall.getRadius();
+		double bigRightBound = matterBig.getxLoc() + matterBig.getRadius();
+		double bigLowBound = matterBig.getyLoc() - matterBig.getRadius();
 		
-		if (( matterB.getxLoc() - matterB.radius < matterA.getxLoc() + matterA.radius &&
-			  matterB.getxLoc() - matterB.radius > matterA.getxLoc() - matterA.radius) &&
-			  matterB.getyLoc() - matterB.radius < matterA.getyLoc() + matterA.radius &&
-			  matterB.getyLoc() - matterB.radius > matterA.getyLoc() - matterA.radius) {
+		if ((smallLeftBound >= bigLeftBound && smallLeftBound <= bigRightBound ||
+			smallRightBound >= bigLeftBound && smallRightBound <= bigRightBound) &&
+			smallUpBound <= bigUpBound && smallUpBound >= bigLowBound &&
+			smallLowBound <= bigUpBound && smallLowBound >= bigLowBound) {
 			return true;
 		}
 			

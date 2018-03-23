@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class System extends Applet implements Runnable {
-	int width = 3840, height = 2160;
-	int numberOfObjects = 200;
+	//int width = 3840, height = 2160;
+	int width = 1800, height = 1000;
+	int numberOfObjects = 0;
 	int gameTick = 0;
 	
 	Thread thread;
@@ -51,11 +52,11 @@ public class System extends Applet implements Runnable {
 		
 //here is where you make your initial materials with a for loop}
 		
-		Matter sun = new Matter(0,0,109*1000000, true);		
+		Matter sun = new Matter(1000,1000,109*1000000, true);		
 		matters.add(sun);
 		
-//		Matter sun2 = new Matter(1200,900,3*10000, 1,-1);		
-//		matters.add(sun2);
+		Matter sun2 = new Matter(151,150,10*1000000, 0,0);		
+		matters.add(sun2);
 //
 //		Matter sun3 = new Matter(-300,300,3*10000,-1,-1.3);		
 //		matters.add(sun3);
