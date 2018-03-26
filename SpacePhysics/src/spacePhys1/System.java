@@ -4,6 +4,7 @@ import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Label;
 import java.util.ArrayList;
 
 
@@ -11,8 +12,10 @@ import java.util.ArrayList;
 public class System extends Applet implements Runnable {
 	//int width = 3840, height = 2160;
 	int width = 1800, height = 1000;
-	int numberOfObjects = 0;
+	int numberOfObjects = 20;
 	int gameTick = 0;
+	double yy = 0;
+	ArrayList<Label> labels = new ArrayList<Label>();
 	
 	Thread thread;
 	ArrayList<Matter> matters = new ArrayList<Matter>();
@@ -21,6 +24,17 @@ public class System extends Applet implements Runnable {
 		this.resize(width, height);
 		thread = new Thread(this);
 		thread.start();		
+		
+		Label l1 = new Label();
+		l1.setText("Mass of sun: ");
+		l1.setLocation(500, 500);
+		l1.setBackground(Color.red);
+		l1.setForeground(Color.BLUE);
+		l1.hasFocus();
+		l1.setVisible(true);
+		l1.setSize(300, 300);
+		add(l1);
+		labels.add(l1);
 
 	}
 
@@ -28,6 +42,7 @@ public class System extends Applet implements Runnable {
 		
 		setBackground (Color.black);
 		g.translate(width/2, height/2);
+		
 		
 		
 		for(Matter a : matters) {
@@ -44,19 +59,19 @@ public class System extends Applet implements Runnable {
 			matter.moveLoop(matters);
 			matter.reCenter(matters);
 		}
-		
+		labels.get(0).setText("Mass of sun = " + matters.get(0).getMass());
+		labels.get(0).setSize(300, 300);
 
 	}
 
 	public void run() {		
 		
 //here is where you make your initial materials with a for loop}
-		
-		Matter sun = new Matter(1000,1000,109*1000000, true);		
+		Matter sun = new Matter(0,0,100*1000000, true);		
 		matters.add(sun);
 		
-		Matter sun2 = new Matter(151,150,10*1000000, 0,0);		
-		matters.add(sun2);
+//		Matter sun2 = new Matter(151,150,10*1000000, 0,0);		
+//		matters.add(sun2);
 //
 //		Matter sun3 = new Matter(-300,300,3*10000,-1,-1.3);		
 //		matters.add(sun3);
@@ -69,7 +84,7 @@ public class System extends Applet implements Runnable {
 		
 		for(int x = 2 ; x < numberOfObjects; x++) {
 			Matter tempObj = new Matter(Math.random()*width - width/2, Math.random()*height - height/2,
-					(Math.random()*5)*10000 , Math.random()*1/2-.25,Math.random()*1/2-.25);
+					(Math.random()*2)*10000 , Math.random()*1/2-.25,Math.random()*1/2-.25);
 			
 			matters.add(tempObj);
 		}

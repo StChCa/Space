@@ -144,19 +144,19 @@ public class Matter {
 			matterSmall = matterBig;
 			matterBig = temp;
 		}
-		double smallLeftBound = matterSmall.getxLoc() - matterSmall.getRadius(); 
-		double smallUpBound = matterSmall.getyLoc() + matterSmall.getRadius();
-		double bigLeftBound = matterBig.getxLoc() - matterBig.getRadius();
-		double bigUpBound = matterBig.getxLoc() + matterBig.getRadius();
+		double smallLeftBound = matterSmall.getxLoc() - matterSmall.getRadius()/2; 
+		double smallUpBound = matterSmall.getyLoc() + matterSmall.getRadius()/2;
+		double bigLeftBound = matterBig.getxLoc() - matterBig.getRadius()/2;
+		double bigUpBound = matterBig.getxLoc() + matterBig.getRadius()/2;
 		
-		double smallRightBound = matterSmall.getxLoc() + matterSmall.getRadius(); 
-		double smallLowBound = matterSmall.getyLoc() - matterSmall.getRadius();
-		double bigRightBound = matterBig.getxLoc() + matterBig.getRadius();
-		double bigLowBound = matterBig.getyLoc() - matterBig.getRadius();
+		double smallRightBound = matterSmall.getxLoc() + matterSmall.getRadius()/2; 
+		double smallLowBound = matterSmall.getyLoc() - matterSmall.getRadius()/2;
+		double bigRightBound = matterBig.getxLoc() + matterBig.getRadius()/2;
+		double bigLowBound = matterBig.getyLoc() - matterBig.getRadius()/2;
 		
 		if ((smallLeftBound >= bigLeftBound && smallLeftBound <= bigRightBound ||
 			smallRightBound >= bigLeftBound && smallRightBound <= bigRightBound) &&
-			smallUpBound <= bigUpBound && smallUpBound >= bigLowBound &&
+			smallUpBound <= bigUpBound && smallUpBound >= bigLowBound ||
 			smallLowBound <= bigUpBound && smallLowBound >= bigLowBound) {
 			return true;
 		}
@@ -227,6 +227,5 @@ public class Matter {
 		
 		g.setColor(Color.WHITE);
 		g.fillOval((int)this.xLoc-this.radius/2,(int)-this.yLoc-this.radius/2,this.radius,this.radius);
-		
 	}
 }
