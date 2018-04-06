@@ -15,6 +15,7 @@ public class Matter {
 	double centerX;
 	double centerY;
 	int radius;
+	Color color = Color.WHITE;
 	
 	
 	public double getxLoc() {
@@ -166,6 +167,8 @@ public class Matter {
 	
 	private void collide(Matter matterA, Matter matterB) {
 		// speed reduction because physics
+		matterA.color = Color.RED;
+		matterB.color = Color.red;
 		double speedReduce = 1/matterA.getMass()*matterB.getMass();
 		matterA.setMass(matterA.getMass()+matterB.getMass());
 		matterB = null;
@@ -225,7 +228,7 @@ public class Matter {
 	
 	public void paintMatter(Graphics g){
 		
-		g.setColor(Color.WHITE);
+		g.setColor(color);
 		g.fillOval((int)this.xLoc-this.radius/2,(int)-this.yLoc-this.radius/2,this.radius,this.radius);
 	}
 }

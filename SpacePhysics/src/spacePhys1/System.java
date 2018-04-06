@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class System extends Applet implements Runnable {
 	//int width = 3840, height = 2160;
 	int width = 1800, height = 1000;
-	int numberOfObjects = 20;
+	int numberOfObjects = 10;
 	int gameTick = 0;
 	double yy = 0;
 	ArrayList<Label> labels = new ArrayList<Label>();
@@ -60,7 +60,7 @@ public class System extends Applet implements Runnable {
 			matter.reCenter(matters);
 		}
 		labels.get(0).setText("Mass of sun = " + matters.get(0).getMass());
-		labels.get(0).setSize(300, 300);
+		labels.get(0).setSize(250, 30);
 
 	}
 
