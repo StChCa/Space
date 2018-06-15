@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class System extends Applet implements Runnable {
 	//int width = 3840, height = 2160;
 	int width = 1800, height = 1000;
-	int numberOfObjects = 10;
+	int numberOfObjects = 30;
 	int gameTick = 0;
 	double yy = 0;
 	ArrayList<Label> labels = new ArrayList<Label>();
@@ -26,7 +26,6 @@ public class System extends Applet implements Runnable {
 		thread.start();		
 		
 		Label l1 = new Label();
-		l1.setText("Mass of sun: ");
 		l1.setLocation(500, 500);
 		l1.setBackground(Color.red);
 		l1.setForeground(Color.BLUE);
@@ -35,6 +34,13 @@ public class System extends Applet implements Runnable {
 		l1.setSize(300, 300);
 		add(l1);
 		labels.add(l1);
+		
+		int topX = height;
+		int left = width/2;
+		for(Matter a : matters) {
+			Label x = new Label();
+			x.setLocation(topX, left);
+		}
 
 	}
 
@@ -82,9 +88,9 @@ public class System extends Applet implements Runnable {
 //		Matter sun5 = new Matter(300,-300,3*10000,1,1);		
 //		matters.add(sun5);
 		
-		for(int x = 2 ; x < numberOfObjects; x++) {
+		for(int x = 1 ; x < numberOfObjects; x++) {
 			Matter tempObj = new Matter(Math.random()*width - width/2, Math.random()*height - height/2,
-					(Math.random()*2)*10000 , Math.random()*1/2-.25,Math.random()*1/2-.25);
+					(Math.random()*2)*10000 , Math.random()*1/2-.15,Math.random()*1/2-.15);
 			
 			matters.add(tempObj);
 		}
